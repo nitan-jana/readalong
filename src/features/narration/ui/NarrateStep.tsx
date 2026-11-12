@@ -2,7 +2,8 @@
 import { useEffect, useState } from 'react';
 import type { Job, Project as ProjectData, Voice } from '../../../shared/types';
 import { postJson, projectUrl } from '../../../app/api';
-import { playHref } from '../../../app/router';
+import { Link } from 'react-router';
+import { paths } from '../../../app/router';
 import { JobProgress } from '../../jobs/ui/JobProgress';
 import { useJob } from '../../jobs/ui/useJob';
 import { VoiceStep } from '../../voice/ui/VoiceStep';
@@ -54,7 +55,7 @@ export function NarrateSteps({ P, voices, onShare, onRunning, onNarrated }: {
         {error && <p className="err">{error}</p>}
         {ready && (
           <div className="row donerow">
-            <a className="btn primary" href={playHref(P.id)}>{running ? 'Open player (still narrating)' : 'Open player'}</a>
+            <Link className="btn primary" to={paths.play(P.id)}>{running ? 'Open player (still narrating)' : 'Open player'}</Link>
             <button type="button" onClick={onShare}>Share to phone</button>
           </div>
         )}

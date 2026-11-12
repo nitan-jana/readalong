@@ -52,10 +52,12 @@ export function ensureBuilt() {
   }
 }
 
-/** index.html at /, hashed assets cached for good, and the icon. */
+/** index.html for the app's pages (/ and /r/…), hashed assets cached for good, and the icon. */
 export function serveBuiltApp(app: Hono) {
   app.get('/assets/*', c => fileResponse(c.req.raw, inside(DIST, c.req.path), { cache: 'public, max-age=31536000, immutable' }));
-  app.get('/', c => fileResponse(c.req.raw, path.join(DIST, 'index.html')));
+  const page = (c: Context) => fileResponse(c.req.raw, path.join(DIST, 'index.html'));
+  app.get('/', page);
+  app.get('/r/*', page); // client-side routes
   app.get('/favicon.svg', c => fileResponse(c.req.raw, path.join(DIST, 'favicon.svg')));
 }
 

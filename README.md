@@ -15,8 +15,8 @@ You need [Node.js](https://nodejs.org) 22.18 or newer (it runs TypeScript direct
 [Claude Code](https://docs.claude.com/en/docs/claude-code) and sign in (`claude` on your PATH).
 
 ```
-git clone <repo-url> readalong-js
-cd readalong-js
+git clone https://github.com/nitan-jana/readalong.git
+cd readalong
 pnpm install            # also builds the app
 pnpm readalong doctor   # optional: checks the voice engine step by step
 ```

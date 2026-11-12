@@ -8,6 +8,6 @@ export function routes(app: Hono) {
     const cfg = await c.req.json().catch(() => ({}));
     return c.json(startJob(pid, 'narrate', 'narrate',
       { folder: projectDir(pid), cfg: { voice: cfg.voice || 'af_heart', speed: Number(cfg.speed) || 1 } },
-      () => ({ player: `#/play/${encodeURIComponent(pid)}` })));
+      () => ({ player: `/r/${encodeURIComponent(pid)}/play` })));
   });
 }

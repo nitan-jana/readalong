@@ -1,6 +1,22 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { App } from './App';
+import { createBrowserRouter, Navigate, RouterProvider } from 'react-router';
+import { Shell, Home, Project } from './App';
+import { PlayerPage } from '../features/player/ui/PlayerPage';
 import './app.css';
 
-createRoot(document.getElementById('root')!).render(<StrictMode><App /></StrictMode>);
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Shell />,
+    children: [
+      { index: true, element: <Home /> },
+      { path: 'r/:id', element: <Project /> },
+    ],
+  },
+  // the player is a full screen of its own (it's also what a phone sees through "Share to phone")
+  { path: '/r/:id/play', element: <PlayerPage /> },
+  { path: '*', element: <Navigate to="/" replace /> },
+]);
+
+createRoot(document.getElementById('root')!).render(<StrictMode><RouterProvider router={router} /></StrictMode>);

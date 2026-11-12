@@ -30,7 +30,8 @@
     "pdfjs-dist": "^6.5.438",
     "phonemizer": "^1.2.1",
     "picocolors": "^1.1.1",
-    "qrcode": "^1.5.4"
+    "qrcode": "^1.5.4",
+    "react-router": "^8.5.1"
   },
   "packageManager": "pnpm@10.28.0",
   "pnpm": {

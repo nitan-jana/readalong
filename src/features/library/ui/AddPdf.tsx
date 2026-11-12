@@ -3,7 +3,8 @@ import { useRef, useState } from 'react';
 import type { Env, Job } from '../../../shared/types';
 import { Icon } from '../../../shared/ui/Icon';
 import { api } from '../../../app/api';
-import { go } from '../../../app/router';
+import { useNavigate } from 'react-router';
+import { paths } from '../../../app/router';
 import { JobProgress } from '../../jobs/ui/JobProgress';
 import { useJob } from '../../jobs/ui/useJob';
 
@@ -16,7 +17,8 @@ export function AddPdf({ env }: { env: Env | null }) {
   const [error, setError] = useState('');
   const file = useRef<HTMLInputElement>(null);
   const useAi = ai && !!env?.claude;
-  const { job } = useJob(jobId, j => { if (j.state === 'done') go(j.result.project); });
+  const navigate = useNavigate();
+  const { job } = useJob(jobId, j => { if (j.state === 'done') navigate(paths.project(j.result.project)); });
 
   const start = async (body: BodyInit, headers: Record<string, string>) => {
     setError(''); setAiLabel(useAi);

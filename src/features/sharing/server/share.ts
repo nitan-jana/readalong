@@ -46,7 +46,7 @@ export async function startShare(pid: string, port = 8800) {
   SHARE.started ??= start(shareApp(), port, '0.0.0.0').then(s => s.port);
   const p = await SHARE.started;
   SHARE.ids.add(pid);
-  return `http://${lanIp()}:${p}/#/play/${encodeURIComponent(pid)}`;
+  return `http://${lanIp()}:${p}/r/${encodeURIComponent(pid)}/play`;
 }
 
 export const unshare = (pid: string) => SHARE.ids.delete(pid);

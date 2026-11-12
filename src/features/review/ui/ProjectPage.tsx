@@ -4,7 +4,8 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Block, Env, Project as ProjectData, Summary, Voice } from '../../../shared/types';
 import { PdfPage, boxStyle } from '../../../shared/ui/PdfPage';
 import { api, postJson, projectUrl } from '../../../app/api';
-import { go } from '../../../app/router';
+import { Link, useNavigate } from 'react-router';
+import { paths } from '../../../app/router';
 import { DeleteDialog } from '../../library/ui/DeleteDialog';
 import { ShareDialog } from '../../sharing/ui/ShareDialog';
 import { NarrateSteps } from '../../narration/ui/NarrateStep';
@@ -13,6 +14,7 @@ import { ReviewStep } from './ReviewStep';
 const narrow = () => matchMedia('(max-width: 900px)').matches;
 
 export function ProjectPage({ id, env, voices, onTitle }: { id: string; env: Env | null; voices: Voice[]; onTitle: (t: string) => void }) {
+  const navigate = useNavigate();
   const [P, setP] = useState<ProjectData | null>(null);
   const [error, setError] = useState('');
   const [tab, setTab] = useState<'setup' | 'pages'>('setup');
@@ -46,7 +48,7 @@ export function ProjectPage({ id, env, voices, onTitle }: { id: string; env: Env
     update(nb); save([nb]); select(nb);
   };
 
-  if (error) return <main className="home"><p className="err">{error}</p><p><button type="button" onClick={() => go(null)}>Back to the library</button></p></main>;
+  if (error) return <main className="home"><p className="err">{error}</p><p><Link className="btn" to={paths.library}>Back to the library</Link></p></main>;
   if (!P) return <main className="home"><p className="hint">Loading…</p></main>;
   const selected = P.blocks.find(b => b.id === sel) ?? null;
 
@@ -98,7 +100,7 @@ export function ProjectPage({ id, env, voices, onTitle }: { id: string; env: Env
       </aside>
 
       {dialog === 'delete' && <DeleteDialog target={{ id: P.id, title: P.title, busy: !!(P.running.narrate || P.running.ai) }}
-        onClose={() => setDialog(null)} onDeleted={() => { setDialog(null); go(null); }} />}
+        onClose={() => setDialog(null)} onDeleted={() => { setDialog(null); navigate(paths.library); }} />}
       {dialog === 'share' && <ShareDialog id={P.id} onClose={() => setDialog(null)} />}
     </main>
   );

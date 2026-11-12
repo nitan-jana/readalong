@@ -77,8 +77,8 @@ export async function doSpeak(dir: string, opts: Opts) {
 /** Open the player for a read-along: in the running app if there is one, otherwise start the app. */
 export async function play(id: string, port = 8765) {
   const { runningAt, runUi } = await import('../server/app.ts');
-  const hash = `#/play/${encodeURIComponent(id)}`;
-  if (await runningAt(port)) { await openInBrowser(`http://127.0.0.1:${port}/${hash}`); return; }
-  await runUi({ port, open: hash });
+  const where = `r/${encodeURIComponent(id)}/play`;
+  if (await runningAt(port)) { await openInBrowser(`http://127.0.0.1:${port}/${where}`); return; }
+  await runUi({ port, open: where });
   await new Promise(() => {});
 }

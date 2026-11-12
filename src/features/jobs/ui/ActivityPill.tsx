@@ -1,10 +1,12 @@
 // The header's "what's running" pill, on every screen; click it to jump to that read-along.
 import type { Job } from '../../../shared/types';
-import { go } from '../../../app/router';
+import { useNavigate } from 'react-router';
+import { paths } from '../../../app/router';
 
 const VERB: Record<string, string> = { narrate: 'Narrating', ai: 'Cleaning up', prepare: 'Reading' };
 
 export function ActivityPill({ jobs }: { jobs: Job[] }) {
+  const navigate = useNavigate();
   const run = jobs.filter(j => j.state === 'running');
   const failed = !run.length && jobs.find(j => j.state === 'error' && Date.now() / 1000 - (j.ended || 0) < 120);
   let text: string, project: string, err = false;
@@ -18,6 +20,6 @@ export function ActivityPill({ jobs }: { jobs: Job[] }) {
   } else return null;
   return (
     <button className={`activity ${err ? 'err' : ''}`} type="button" title="Open the read-along being processed"
-      onClick={() => project && go(project)}>{text}</button>
+      onClick={() => project && navigate(paths.project(project))}>{text}</button>
   );
 }

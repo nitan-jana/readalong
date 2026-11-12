@@ -29,8 +29,8 @@ function library(): LibraryItem[] {
 }
 
 export function routes(app: Hono, { onDelete }: { onDelete?: (id: string) => void } = {}) {
+  app.get('/p/:id', c => c.redirect(`/r/${encodeURIComponent(c.req.param('id'))}/play`));
   app.on(['GET', 'HEAD'], '/p/:id/*', projectFile);
-  app.get('/p/:id', c => c.redirect(`/#/play/${encodeURIComponent(c.req.param('id'))}`));
   app.get('/api/library', c => c.json(library()));
 
   // add a PDF: an upload (the body) or a link ({ url }); reading it runs as a job

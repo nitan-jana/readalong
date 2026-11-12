@@ -2,6 +2,7 @@
 // audio controls docked at the bottom. Works while narration is still running: it follows
 // progress.json and picks up new parts from narration.json as they're written.
 import { memo, useCallback, useEffect, useMemo, useRef, useState, type MouseEvent, type RefObject } from 'react';
+import { Link } from 'react-router';
 import { PdfPage, boxStyle, pointOnPage } from '../../../shared/ui/PdfPage';
 import type { Box, Narration, Page, PlayerData } from '../../../shared/types';
 import { buildIndex, fmtTime, highlight, hitTest, locate, sectionOf, uttAt, wordAt, phraseRange, type Mode } from './timing';
@@ -24,7 +25,7 @@ function storage(title: string) {
 interface ProgressFile { done: number; total: number; eta_s: number | null; parts: number; finished: boolean }
 
 /** base: where the project's files are served (…/narration.json, progress.json, audio/). */
-export function Player({ initial, base, back }: { initial: PlayerData; base: string; back?: { href: string; label: string } }) {
+export function Player({ initial, base, back }: { initial: PlayerData; base: string; back?: { to: string; label: string } }) {
   const store = useMemo(() => storage(initial.title), [initial.title]);
   const [data, setData] = useState<PlayerData>(initial);
   const ix = useMemo(() => buildIndex(data), [data]);
@@ -246,7 +247,7 @@ export function Player({ initial, base, back }: { initial: PlayerData; base: str
   return (
     <div className="listen">
       <div className="top">
-        {back && <a className="back-link" href={back.href}>← {back.label}</a>}
+        {back && <Link className="back-link" to={back.to}>← {back.label}</Link>}
         <h1>{data.title}</h1>
         {loader}
         <select aria-label="Jump to section" value="" onChange={e => e.target.value !== '' && seekUtt(+e.target.value, true)}>
