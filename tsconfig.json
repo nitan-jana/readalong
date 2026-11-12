@@ -1,0 +1,5 @@
+{
+  // Two halves with different globals: the browser app (DOM) and the Node side (CLI, server, workers).
+  "files": [],
+  "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }]
+}

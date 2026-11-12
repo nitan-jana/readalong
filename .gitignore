@@ -1,0 +1,6 @@
+node_modules/
+dist/
+readalong-library/
+.cache/
+*.log
+*.tmp

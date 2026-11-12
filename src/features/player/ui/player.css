@@ -1,0 +1,44 @@
+/* The player screen: the PDF's pages in one column with highlights drawn over them, controls docked
+   below. Everything is scoped to .listen so it can't clash with the rest of the app. */
+.listen { min-height: 100%; background: var(--bg); }
+.listen .top { position: sticky; top: 0; z-index: 5; background: var(--panel); border-bottom: 1px solid var(--rule); padding: 8px 16px; display: flex; gap: 12px; align-items: center; min-height: 52px; }
+.listen .top .back-link { flex: none; color: var(--muted); text-decoration: none; font-size: 13px; padding: 5px 8px; border-radius: 8px; }
+.listen .top .back-link:hover { color: var(--ink); background: var(--raise); }
+.listen .top h1 { font-size: 15px; font-weight: 600; margin: 0; flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.listen .top .job.compact { flex: 0 1 430px; }
+.listen select { font: inherit; font-size: 13px; width: auto; color: var(--ink); background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; padding: 5px 8px; max-width: 30vw; }
+.listen .lpages { display: grid; gap: 16px; max-width: 980px; margin: 16px auto 150px; padding: 0 16px; }
+.listen .pg { position: relative; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.18); border-radius: 2px; overflow: hidden; cursor: pointer; width: 100%; max-width: none; }
+.listen .pg img { display: block; width: 100%; height: auto; }
+.listen .hl { position: absolute; pointer-events: none; border-radius: 3px; mix-blend-mode: multiply; }
+.listen .hl.para { background: var(--hl-para); }
+.listen .hl.phrase { background: var(--hl-phrase); }
+.listen .hl.word { background: var(--hl-word); }
+.listen .dock { position: fixed; left: 0; right: 0; bottom: 0; z-index: 6; background: var(--panel); border-top: 1px solid var(--rule); box-shadow: 0 -6px 24px rgba(0,0,0,.1); padding: 8px 16px 10px; }
+.listen .pin { max-width: 980px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; }
+.listen .row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.listen .ctrls { display: flex; align-items: center; gap: 2px; }
+.listen .ib, .listen .play { all: unset; display: inline-grid; place-items: center; border-radius: 50%; cursor: pointer; }
+.listen .ib { width: 38px; height: 38px; color: var(--ink); }
+.listen .ib:hover { background: var(--rule); }
+.listen .ib svg { width: 20px; height: 20px; }
+.listen .play { width: 46px; height: 46px; background: var(--accent); color: var(--accent-ink); }
+.listen .play svg { width: 22px; height: 22px; }
+.listen .ib:focus-visible, .listen .play:focus-visible, .listen .lseg button:focus-visible, .listen .seek:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.listen .info { flex: 1 1 160px; min-width: 0; font-size: 12.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.listen .info b { display: block; color: var(--ink); font-weight: 500; font-size: 13.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.listen .lseg { display: inline-flex; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; }
+.listen .lseg button { all: unset; font-size: 12.5px; padding: 5px 10px; cursor: pointer; color: var(--muted); }
+.listen .lseg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.listen .seek { width: 100%; margin: 0; accent-color: var(--accent); }
+.listen .follow { position: fixed; right: 16px; bottom: 120px; z-index: 7; background: var(--accent); color: var(--accent-ink); border: 0; border-radius: 999px; padding: 8px 14px; font: inherit; font-size: 13px; cursor: pointer; box-shadow: 0 4px 14px rgba(0,0,0,.2); }
+@media (max-width: 600px) {
+  .listen .lpages { padding: 0 6px; gap: 10px; }
+  .listen .info { order: -1; flex-basis: 100%; }
+  .listen .ctrls { flex-basis: 100%; justify-content: center; }
+  .listen .lseg button { padding: 5px 9px; }
+  .listen .dock .row { justify-content: space-between; row-gap: 6px; }
+  .listen .follow { bottom: 150px; }
+  .listen .top { flex-wrap: wrap; padding: 8px 10px; }
+  .listen .top .job.compact { order: 3; flex-basis: 100%; }
+}

@@ -1,0 +1,20 @@
+{
+  // Node runs these .ts files directly (type stripping), so: explicit .ts import paths, `import type`
+  // for types, and only syntax that can simply be erased (no enums, namespaces or parameter properties).
+  "compilerOptions": {
+    "target": "ES2023",
+    "lib": ["ES2023"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "erasableSyntaxOnly": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "noUnusedLocals": true,
+    "types": ["node"]
+  },
+  "include": ["bin", "src/server", "src/cli", "src/shared/node", "src/shared/types.ts", "src/features/*/server", "src/**/*.test.ts", "vite.config.ts"]
+}

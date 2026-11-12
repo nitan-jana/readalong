@@ -1,0 +1,16 @@
+.job { background: var(--raise, var(--bg)); border: 1px solid var(--rule); border-radius: 10px; padding: 11px 13px; display: grid; gap: 8px; }
+.job .row { display: flex; gap: 8px; align-items: center; }
+.job .grow { flex: 1; min-width: 0; }
+.job .meta { display: flex; justify-content: space-between; gap: 8px; font-size: 12.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.job .err { color: var(--warn, #b4532a); font-size: 13px; white-space: pre-wrap; }
+.bar2 { height: 6px; border-radius: 99px; background: var(--rule); overflow: hidden; }
+.bar2 > i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .3s; }
+/* one line, for a header: label · bar · numbers */
+.job.compact { display: flex; align-items: center; gap: 10px; padding: 5px 10px; border-radius: 999px; font-size: 12.5px; min-width: 0; }
+.job.compact .row { flex: none; }
+.job.compact b { font-weight: 500; white-space: nowrap; }
+.job.compact .bar2 { flex: 1 1 120px; min-width: 60px; max-width: 220px; height: 5px; }
+.job.compact .meta { flex: none; gap: 6px; white-space: nowrap; }
+.job.compact .meta span:empty { display: none; }
+@media (max-width: 600px) { .job.compact .meta span:last-child { display: none; } }
+@media (prefers-reduced-motion: reduce) { .bar2 > i { transition: none; } }

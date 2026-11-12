@@ -1,0 +1,61 @@
+{
+  "name": "readalong",
+  "version": "0.1.0",
+  "description": "Turn a PDF into a narrated read-along: natural local TTS that highlights the PDF as it reads.",
+  "type": "module",
+  "bin": {
+    "readalong": "bin/readalong.ts"
+  },
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "readalong": "node bin/readalong.ts",
+    "start": "node bin/readalong.ts ui",
+    "dev": "vite",
+    "build": "vite build",
+    "prepare": "vite build",
+    "typecheck": "tsc -p tsconfig.app.json && tsc -p tsconfig.node.json",
+    "test": "node --test \"src/**/*.test.ts\""
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@breezystack/lamejs": "^1.2.7",
+    "@clack/prompts": "^1.9.0",
+    "@hono/node-server": "^2.1.7",
+    "@napi-rs/canvas": "^1.1.0",
+    "fflate": "^0.8.3",
+    "hono": "^4.13.18",
+    "onnxruntime-node": "^1.31.1",
+    "pdfjs-dist": "^6.5.438",
+    "phonemizer": "^1.2.1",
+    "picocolors": "^1.1.1",
+    "qrcode": "^1.5.4"
+  },
+  "packageManager": "pnpm@10.28.0",
+  "pnpm": {
+    "ignoredBuiltDependencies": [
+      "onnxruntime-node"
+    ]
+  },
+  "files": [
+    "bin",
+    "src",
+    "dist",
+    "index.html",
+    "public",
+    "README.md",
+    "LICENSE"
+  ],
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "@types/qrcode": "^1.5.6",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.3.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.8"
+  }
+}
