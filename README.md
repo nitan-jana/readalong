@@ -8,6 +8,30 @@ Everything is TypeScript: a React + Vite app, and a Node side (CLI, Hono server,
 that Node runs directly, with no build step. The code is organised by feature, with each feature's
 server code and UI side by side.
 
+https://github.com/user-attachments/assets/671b4358-d5b2-4785-9629-b45b2f60398a
+
+## Screenshots
+
+The player: the current word is highlighted on the PDF page as it is read.
+
+![The player, with the current word highlighted on the PDF page](docs/screenshots/player.png)
+
+The library: add a PDF, or play a read-along that you made before.
+
+![Library page](docs/screenshots/library.png)
+
+The review page: check which blocks are read aloud, choose a voice, and narrate.
+
+![Review page](docs/screenshots/review.png)
+
+Share to phone: scan the QR code on the same Wi-Fi to open the player on your phone.
+
+![Share to phone dialog with a QR code](docs/screenshots/share-to-phone.png)
+
+The guided terminal workflow, from a PDF link to a finished read-along.
+
+![Guided terminal workflow](docs/screenshots/terminal.png)
+
 ## Setup
 
 You need [Node.js](https://nodejs.org) 22.18 or newer (it runs TypeScript directly) and [pnpm](https://pnpm.io/installation)
